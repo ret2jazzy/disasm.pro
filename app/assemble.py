@@ -34,7 +34,6 @@ Receive a JSON Object with data to assemble
 
 @ninja_socketio.on('assemble')
 def assemble(code):
-    print("Assembling", code['code'])
     try:
         current_settings = session['settings']
 
@@ -54,5 +53,4 @@ def assemble(code):
 
         ninja_socketio.emit('assembled', assembled_code)
     except:
-        print("error assembling")
         return 
