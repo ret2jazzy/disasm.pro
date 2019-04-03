@@ -19,18 +19,22 @@ document.body.onload = ()=> {
 
     document.getElementById('ARCH').addEventListener('change', function(){
         arch_update(document.getElementById('ARCH').value);
+        update_settings_to_server();
     })
     
     document.getElementById('MODE').addEventListener('change', function(){
         mode_update(document.getElementById('MODE').value);
+        update_settings_to_server();
     })
 
     document.getElementById('ENDIAN').addEventListener('change', function(){
         endian_update(document.getElementById('ENDIAN').value);
+        update_settings_to_server();
     })
 
     document.getElementById('OFFSET').addEventListener('change', function(){
         offset_update(document.getElementById('OFFSET').value);
+        update_settings_to_server();
     })
     
     document.getElementById('VIEW').addEventListener('change', function(){
@@ -105,14 +109,10 @@ function clear_option_element(element){
 
 function offset_update(OFFSET){
     global_settings['OFFSET'] = OFFSET;
-
-    update_settings_to_server()
 }
 
 function endian_update(ENDIAN){
     global_settings['ENDIAN'] = ENDIAN;
-
-    update_settings_to_server()
 }
 
 function mode_update(MODE){
@@ -135,7 +135,6 @@ function mode_update(MODE){
         endian_update(current_mode_endians[0])
     else {
         document.getElementById('ENDIAN').value = global_settings['ENDIAN']
-        update_settings_to_server()
     }
 
 }
@@ -160,15 +159,11 @@ function arch_update(ARCH){
         mode_update(current_arch_modes[0]);
     else {
         document.getElementById('MODE').value = global_settings['MODE']
-        update_settings_to_server()
     }
 }
 
 function view_update(VIEW){
     global_settings['VIEW'] = VIEW;
-
-    update_settings_to_server()
-
 }
 
 function sync_settings_local(){
