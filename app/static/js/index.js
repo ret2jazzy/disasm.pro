@@ -1,12 +1,8 @@
 
+const settings_skeleton = {'ARCH' : '', 'MODE' : '', 'ENDIAN' : '', 'OFFSET' : '', 'VIEW' : ''}
 
-let global_settings = {
-    'ARCH' : null,
-    'ENDIAN' : null,
-    'MODE' : null,
-    'OFFSET' : null,
-};
-
+let global_settings = localStorage;
+//The assembled code bytes are the stored code from the last set_settings
 let socket, asm_editor, machine_editor;
 
 let mutex_lock = false;
@@ -15,16 +11,7 @@ document.body.onload = ()=> {
 
     socket = io.connect('http://' + document.domain + ':' + location.port); // SocketIO's socket
 
-    asm_editor = ace.edit("asm_editor");// The editor where we write asm 
-    asm_editor.setTheme("ace/theme/dawn");
-    asm_editor.session.setMode("ace/mode/assembly_x86");
-
-    machine_editor = ace.edit("machine_editor");// Where the disassebmled code is displayed
-    machine_editor.setTheme("ace/theme/dawn");
-    machine_editor.session.setMode("ace/mode/text");
-
-    //Handler for set_settings
-    socket.on('set_settings', handle_set_settings)
+    init_settings()
 
     //Handler for when we receive assembled code
     socket.on('assembled', update_assembled_code)
@@ -44,24 +31,75 @@ document.body.onload = ()=> {
     document.getElementById('OFFSET').addEventListener('change', function(){
         offset_update(document.getElementById('OFFSET').value);
     })
+    
+    document.getElementById('VIEW').addEventListener('change', function(){
+        view_update(document.getElementById('VIEW').value);
+        update_assembled_code(JSON.parse(global_settings.machine_code_bytes));
+    })
 
     asm_editor.session.on('change', function(delta) {
+        global_settings.asm_code = asm_editor.getValue()
+
         if (mutex_lock) return; //A lock here is neede because setValue of ace editor fires onchange event
+
         send_asm_update();
     });
+
     machine_editor.session.on('change', function(delta) {
+        global_settings.machine_code = machine_editor.getValue()
+
         if (mutex_lock) return;
-        console.log("ONCHANGE WTF");
     });
-    
-    socket.emit('get_settings');
+
 }
+
+function init_settings(){
+
+    if(global_settings.ARCH === undefined){ //if only ARCH is null, aka new session, initialize everything
+        default_settings = {'ARCH' : 'ARCH_X86', 'MODE' : 'MODE_64', 'ENDIAN' : 'MODE_LITTLE_ENDIAN', 'OFFSET' : '0', 'VIEW' : '1'}
+        //Set the value of settings being sent to server
+        for(key in default_settings){
+            global_settings[key] = default_settings[key]
+        }
+
+        global_settings.asm_code = "mov rax, 0x0\n";
+        global_settings.machine_code = "48 C7 C0 00 00 00 00\n"
+        global_settings.machine_code_bytes = "[[0x48, 0xC7, 0xC0, 0x00, 0x00, 0x00, 0x00]]" 
+
+    }
+
+    sync_settings_local()
+
+    asm_editor = ace.edit("asm_editor");// The editor where we write asm 
+    asm_editor.setTheme("ace/theme/dawn");
+    asm_editor.session.setMode("ace/mode/assembly_x86");
+    asm_editor.session.setValue(global_settings.asm_code)
+
+    machine_editor = ace.edit("machine_editor");// Where the disassebmled code is displayed
+    machine_editor.setTheme("ace/theme/dawn");
+    machine_editor.session.setMode("ace/mode/text");
+    machine_editor.session.setValue(global_settings.machine_code)
+
+    update_settings_to_server()
+
+}
+
+function update_settings_to_server(){
+    current_settings = settings_skeleton;
+
+    for (key in current_settings){
+        current_settings[key] = global_settings[key]
+    }
+
+    socket.emit('update_settings', current_settings)
+}
+
 function send_asm_update(){
     let asm_code = asm_editor.getValue();
     socket.emit('assemble', {'code':asm_code})
 }
 
-function update_assembled_code(code){
+function update_assembled_prettified(code){
     output_code = "";
 
     code.forEach(function(code_line){
@@ -70,8 +108,31 @@ function update_assembled_code(code){
     })
 
     mutex_lock = true
-    machine_editor.setValue(output_code, 1)
+    machine_editor.setValue(output_code, 1);
     mutex_lock = false;
+
+}
+
+function update_assembled_raw(code){
+    let output_code = ""
+
+    code.forEach(function(code_line){
+        hexed_line_raw = code_line.map(function(inp){return "\\x"+ ("0"+inp.toString(16)).substr(-2).toUpperCase()}).join('')
+        output_code += hexed_line_raw
+    })
+    mutex_lock = true
+    machine_editor.setValue(output_code, 1);
+    mutex_lock = false;
+
+}
+
+function update_assembled_code(code){
+    global_settings.machine_code_bytes = JSON.stringify(code);// Update the code bytes in local storage for when we change modes
+
+    if (global_settings['VIEW'] == '1')
+        update_assembled_prettified(code)
+    else update_assembled_raw(code);
+
 }
 
 function clear_option_element(element){
@@ -82,13 +143,13 @@ function clear_option_element(element){
 function offset_update(OFFSET){
     global_settings['OFFSET'] = OFFSET;
 
-    socket.emit('update_settings', global_settings)
+    update_settings_to_server()
 }
 
 function endian_update(ENDIAN){
     global_settings['ENDIAN'] = ENDIAN;
 
-    socket.emit('update_settings', global_settings)
+    update_settings_to_server()
 }
 
 function mode_update(MODE){
@@ -111,18 +172,18 @@ function mode_update(MODE){
         endian_update(current_mode_endians[0])
     else {
         document.getElementById('ENDIAN').value = global_settings['ENDIAN']
-        socket.emit('update_settings', global_settings)
+        update_settings_to_server()
     }
 
 }
 
 function arch_update(ARCH){
     global_settings['ARCH'] = ARCH;
-   
+
     current_arch = keystone_modes[ARCH]
 
     current_arch_modes = Object.keys(current_arch['MODES'])
-    
+
     clear_option_element('MODE')
 
     current_arch_modes.forEach(function(mode){
@@ -131,32 +192,37 @@ function arch_update(ARCH){
         opt.value = mode
         document.getElementById('MODE').add(opt);
     })
-    
+
     if (!current_arch_modes.includes(global_settings['MODE']))
         mode_update(current_arch_modes[0]);
     else {
         document.getElementById('MODE').value = global_settings['MODE']
-        socket.emit('update_settings', global_settings)
+        update_settings_to_server()
     }
+}
 
+function view_update(VIEW){
+    global_settings['VIEW'] = VIEW;
+
+    update_settings_to_server()
 
 }
 
-
-function handle_set_settings(settings){
+function sync_settings_local(){
     //Just change the ARCH, it will start a chain of event handlers...
-    global_settings = settings;
+    document.getElementById('ARCH').value = global_settings['ARCH']
+    arch_update(global_settings['ARCH']);
 
-    document.getElementById('ARCH').value = settings['ARCH']
-    arch_update(settings['ARCH']);
+    document.getElementById('MODE').value = global_settings['MODE']
+    mode_update(global_settings['MODE']);
 
-    document.getElementById('MODE').value = settings['MODE']
-    mode_update(settings['MODE']);
-    
-    document.getElementById('ENDIAN').value = settings['ENDIAN']
-    endian_update(settings['ENDIAN']);
+    document.getElementById('ENDIAN').value = global_settings['ENDIAN']
+    endian_update(global_settings['ENDIAN']);
 
-    document.getElementById('OFFSET').value = settings['OFFSET']
-    offset_update(settings['OFFSET']);
+    document.getElementById('OFFSET').value = global_settings['OFFSET']
+    offset_update(global_settings['OFFSET']);
+
+    document.getElementById('VIEW').value = global_settings['VIEW']
+    view_update(global_settings['VIEW']);
 }
 

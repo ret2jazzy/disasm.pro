@@ -12,18 +12,14 @@ from flask_socketio import emit
 @ninja_socketio.on('update_settings')
 def update(options):
     try:
-        ks_ARCH = keystone_modes[options['ARCH']]
-        ks_MODE = ks_ARCH['MODES'][options['MODE']]
-        ks_ENDIAN = ks_MODE['ENDIAN'][options['ENDIAN']]
-
         session['settings'] = copy.copy(options)
 
     except:
         return False
 
-@ninja_socketio.on('get_settings')
-def get_settings():
-    if 'settings' not in session:
-        session['settings'] = {'ARCH' : 'ARCH_X86', 'MODE' : 'MODE_64', 'ENDIAN' : 'MODE_LITTLE_ENDIAN', 'OFFSET' : 0}
+# @ninja_socketio.on('get_settings')
+# def get_settings():
+    # if 'settings' not in session:
+        # session['settings'] = {'ARCH' : 'ARCH_X86', 'MODE' : 'MODE_64', 'ENDIAN' : 'MODE_LITTLE_ENDIAN', 'OFFSET' : '0', 'VIEW' : '1'}
 
-    emit('set_settings', session['settings'])
+#     emit('set_settings', session['settings'])
