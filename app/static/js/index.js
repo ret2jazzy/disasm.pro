@@ -68,7 +68,6 @@ function init_settings(){
 
     }
 
-    sync_settings_local()
 
     asm_editor = ace.edit("asm_editor");// The editor where we write asm 
     asm_editor.setTheme("ace/theme/dawn");
@@ -79,6 +78,8 @@ function init_settings(){
     machine_editor.setTheme("ace/theme/dawn");
     machine_editor.session.setMode("ace/mode/text");
     machine_editor.session.setValue(global_settings.machine_code)
+    
+    sync_settings_local()
 
     update_settings_to_server()
 
