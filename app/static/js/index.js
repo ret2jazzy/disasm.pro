@@ -92,6 +92,8 @@ function update_settings_to_server(){
     }
 
     socket.emit('update_settings', current_settings)
+    //Only for when the assembler is available
+    send_asm_update()
 }
 
 function clear_option_element(element){
