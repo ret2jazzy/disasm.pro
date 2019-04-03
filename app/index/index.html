@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Assembly Ninja</title>
+	<link rel="stylesheet" href="static/css/libs/w3.css">
+	<link rel="stylesheet" href="static/css/index.css">
+
+    <script src="static/js/libs/ace/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8" async defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+</head>
+<body>
+	<div>
+		<div class="w3-container w3-serif w3-black">
+            <div class="w3-panel w3-container w3-row-padding w3-black">
+                <div class="w3-col" style="margin-right:10px;width: 11%">
+                    <select id="ARCH">
+                        <option value="ARCH_X86">Arch: x86</option>
+                        <option value="ARCH_ARM">Arch: ARM</option>
+                        <option value="ARCH_ARM64">Arch: ARM64</option>
+                        <option value="ARCH_MIPS">Arch: MIPS</option>
+                        <option value="ARCH_PPC">Arch: PowerPC</option>
+                        <option value="ARCH_SPARC">Arch: Sparc</option>
+                    </select>
+                </div>
+                <div class="w3-col" style="margin-right:10px;width: 11%">
+                    <select id="MODE">
+                    </select>
+                </div>
+                <div class="w3-col" style="margin-right:10px;width: 12%">
+                    <select id="ENDIAN">
+                    </select>
+                </div>
+                <div class="w3-col" style="margin-right:10px;width: 20%">
+                    Offset: <input id="OFFSET" value="0" style="width:70%" />
+                </div>
+                <div class="w3-col" style="margin-right:10px;width: 13%">
+                    <select id="preview_type">
+                        <option value="x86">Preview: Binary</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <!-- Header -->
+
+		<div style="margin-top:20px">
+			<div class="w3-row-padding">
+                <div class="w3-col" style="width:50%">
+                    <div id="asm_editor" class="editor w3-card"></div>
+                </div>
+                <div class="w3-col" style="width:50%">
+                    <div id="machine_editor" class="editor w3-card"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+    </div>
+    <script src="static/js/constants.js"></script>
+    <script src="static/js/util.js"></script>
+    <script src="static/js/index.js" type="text/javascript" charset="utf-8" async defer></script>
+</body>
+</html>
