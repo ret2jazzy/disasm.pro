@@ -7,20 +7,19 @@ let global_settings = {
     'OFFSET' : null,
 };
 
-let socket = io.connect('http://' + document.domain + ':' + location.port); // SocketIO's socket
+let socket, asm_editor, machine_editor;
 
 let mutex_lock = false;
     
-let asm_editor = ace.edit("asm_editor");// The editor where we write asm 
-
-let machine_editor = ace.edit("machine_editor");// Where the disassebmled code is displayed
-
 document.body.onload = ()=>{
 
+    socket = io.connect('http://' + document.domain + ':' + location.port); // SocketIO's socket
+
+    asm_editor = ace.edit("asm_editor");// The editor where we write asm 
     asm_editor.setTheme("ace/theme/dawn");
     asm_editor.session.setMode("ace/mode/assembly_x86");
 
-
+    machine_editor = ace.edit("machine_editor");// Where the disassebmled code is displayed
     machine_editor.setTheme("ace/theme/dawn");
     machine_editor.session.setMode("ace/mode/text");
 
@@ -47,26 +46,20 @@ document.body.onload = ()=>{
     })
 
     asm_editor.session.on('change', function(delta) {
-        let asm_code = asm_editor.getValue();
-        socket.emit('assemble', {'code':asm_code})
+        if (mutex_lock) return; //A lock here is neede because setValue of ace editor fires onchange event
+        send_asm_update();
     });
-    //editor2.session.on('change', function(delta) {
-        //if(lock){
-            //return;
-        //}
-        //lock = true;
-        //try{
-            //let editorText = editor2.getValue();
-            //let disasmText = handleDisasm(globalConfig,editorText);
-            //editor.setValue(putInstructions(disasmText));
-        //}catch(e){
-            //console.log(e);
-            //restoreDefault();
-        //}
-        //lock = false;
-    //});
+    machine_editor.session.on('change', function(delta) {
+        if (mutex_lock) return;
+        console.log("ONCHANGE WTF");
+    });
     
     socket.emit('get_settings');
+}
+function send_asm_update()
+{
+    let asm_code = asm_editor.getValue();
+    socket.emit('assemble', {'code':asm_code})
 }
 
 function update_assembled_code(code)
@@ -78,7 +71,9 @@ function update_assembled_code(code)
         output_code += hexed_line + "\n"
     })
 
+    mutex_lock = true
     machine_editor.setValue(output_code, 1)
+    mutex_lock = false;
 }
 
 function clear_option_element(element)
