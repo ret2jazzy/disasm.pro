@@ -11,10 +11,11 @@ document.body.onload = ()=> {
 
     socket = io.connect('http://' + document.domain + ':' + location.port); // SocketIO's socket
 
+    socket.on('assembled', update_assembled_code)
+
     init_settings()
 
     //Handler for when we receive assembled code
-    socket.on('assembled', update_assembled_code)
 
     document.getElementById('ARCH').addEventListener('change', function(){
         arch_update(document.getElementById('ARCH').value);
