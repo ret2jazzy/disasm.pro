@@ -11,7 +11,7 @@ let socket, asm_editor, machine_editor;
 
 let mutex_lock = false;
     
-document.body.onload = ()=>{
+document.body.onload = ()=> {
 
     socket = io.connect('http://' + document.domain + ':' + location.port); // SocketIO's socket
 
@@ -56,14 +56,12 @@ document.body.onload = ()=>{
     
     socket.emit('get_settings');
 }
-function send_asm_update()
-{
+function send_asm_update(){
     let asm_code = asm_editor.getValue();
     socket.emit('assemble', {'code':asm_code})
 }
 
-function update_assembled_code(code)
-{
+function update_assembled_code(code){
     output_code = "";
 
     code.forEach(function(code_line){
@@ -76,27 +74,24 @@ function update_assembled_code(code)
     mutex_lock = false;
 }
 
-function clear_option_element(element)
-{
+function clear_option_element(element){
+
     while (document.getElementById(element).length != 0) document.getElementById(element).remove(0);
 }
 
-function offset_update(OFFSET)
-{
+function offset_update(OFFSET){
     global_settings['OFFSET'] = OFFSET;
 
     socket.emit('update_settings', global_settings)
 }
 
-function endian_update(ENDIAN)
-{
+function endian_update(ENDIAN){
     global_settings['ENDIAN'] = ENDIAN;
 
     socket.emit('update_settings', global_settings)
 }
 
-function mode_update(MODE)
-{
+function mode_update(MODE){
     global_settings['MODE'] = MODE;
 
     current_mode = keystone_modes[global_settings['ARCH']]['MODES'][MODE]
@@ -114,16 +109,14 @@ function mode_update(MODE)
 
     if (!current_mode_endians.includes(global_settings['ENDIAN']))
         endian_update(current_mode_endians[0])
-    else 
-    {
+    else {
         document.getElementById('ENDIAN').value = global_settings['ENDIAN']
         socket.emit('update_settings', global_settings)
     }
 
 }
 
-function arch_update(ARCH)
-{
+function arch_update(ARCH){
     global_settings['ARCH'] = ARCH;
    
     current_arch = keystone_modes[ARCH]
@@ -141,8 +134,7 @@ function arch_update(ARCH)
     
     if (!current_arch_modes.includes(global_settings['MODE']))
         mode_update(current_arch_modes[0]);
-    else 
-    {
+    else {
         document.getElementById('MODE').value = global_settings['MODE']
         socket.emit('update_settings', global_settings)
     }
@@ -151,8 +143,7 @@ function arch_update(ARCH)
 }
 
 
-function handle_set_settings(settings)
-{
+function handle_set_settings(settings){
     //Just change the ARCH, it will start a chain of event handlers...
     global_settings = settings;
 
