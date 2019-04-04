@@ -10,9 +10,7 @@ function send_machine_update(){
     }catch (err){
         return
     }
-    console.log(machine_code_parsed)
-
-    global_settings.machine_code_bytes = machine_code_parsed;
+    global_settings.machine_code_bytes = JSON.stringify(machine_code_parsed);
 
     socket.emit('disassemble', {'code':machine_code_parsed})
 
@@ -26,11 +24,13 @@ function update_disassembled_code(code){
 
 function parse_raw(code){
     let raw_parsed = JSON.parse('"' + code.replace(/\\x/g, "\\u00") + '"'); // A super shitty hack to parse raw strings
-    let machines_parsed = []
+    let machine_parsed = []
     //conver to array of ints
-    raw_parsed.forEach(c => machine_parsed.push(c.charCodeAt(0)))
+    for(chr of raw_parsed)machine_parsed.push(chr.charCodeAt(0))
 
-    return [].push(machine_parsed) //Because of the structure of machine_code_bytes
+    let output_for_machine_bytes = []//Because of the structure of machine_code_bytes
+    output_for_machine_bytes.push(machine_parsed) 
+    return output_for_machine_bytes
 }
 
 function parse_prettified(code){
