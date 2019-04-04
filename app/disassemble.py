@@ -31,7 +31,10 @@ def disassemble(code):
     current_capstone = capstone_instances[current_settings['ARCH']][current_settings['MODE']][current_settings['ENDIAN']]
 
     if code['view'] == '1':
-        code_to_disassemble =  bytes.fromhex(code['code'].replace("\n", "").replace(" ", ""))
+        hexed_code = code['code'].replace("\n", "").replace(" ", "")
+        if len(hexed_code)&1 != 0:
+            return
+        code_to_disassemble =  bytes.fromhex(hexed_code)
     else:
         code_to_disassemble = code['code'].encode().decode('unicode_escape').encode() #I love python3 /s
 
