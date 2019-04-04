@@ -12,8 +12,8 @@
 	<div>
 		<div class="w3-container w3-serif w3-black">
             <div class="w3-panel w3-container w3-row-padding w3-black">
-                <div class="w3-col" style="margin-right:10px;width: 11%">
-                    <select id="ARCH">
+                <div class="w3-col" style="margin-right:10px;width: 15%">
+                    <select id="ARCH" class="simple-style-inputs w3-select">
                         <option value="ARCH_X86">Arch: x86</option>
                         <option value="ARCH_ARM">Arch: ARM</option>
                         <option value="ARCH_ARM64">Arch: ARM64</option>
@@ -22,19 +22,19 @@
                         <option value="ARCH_SPARC">Arch: Sparc</option>
                     </select>
                 </div>
-                <div class="w3-col" style="margin-right:10px;width: 11%">
-                    <select id="MODE">
+                <div class="w3-col" style="margin-right:10px;width: 15%">
+                    <select id="MODE" class="simple-style-inputs w3-select">
                     </select>
                 </div>
-                <div class="w3-col" style="margin-right:10px;width: 12%">
-                    <select id="ENDIAN">
+                <div class="w3-col" style="margin-right:10px;width: 15%">
+                    <select id="ENDIAN" class="simple-style-inputs w3-select">
                     </select>
                 </div>
                 <div class="w3-col" style="margin-right:10px;width: 20%">
-                    Offset: <input id="OFFSET" value="0" style="width:70%" />
+                    Offset: <input id="OFFSET" value="0" style="width:70%" class="simple-style-inputs w3-select" />
                 </div>
-                <div class="w3-col" style="margin-right:10px;width: 13%">
-                    <select id="VIEW">
+                <div class="w3-col" style="margin-right:10px;width: 15%">
+                    <select id="VIEW" class="simple-style-inputs w3-select">
                         <option value="1">Prettified</option>
                         <option value="2">Raw String</option>
                     </select>
@@ -45,10 +45,17 @@
 
 		<div style="margin-top:20px">
 			<div class="w3-row-padding">
-                <div class="w3-col" style="width:50%">
+                <div class="w3-col" style="width:46%">
                     <div id="asm_editor" class="editor w3-card"></div>
                 </div>
-                <div class="w3-col" style="width:50%">
+                <div class="w3-col w3-center" style="width:8%">
+                    <div class="cirlce-wrap" style="margin-top:35vh">
+                        <div class="circle">
+                            Here
+                        </div>
+                    </div>
+                </div>
+                <div class="w3-col" style="width:46%">
                     <div id="machine_editor" class="editor w3-card"></div>
                 </div>
             </div>
