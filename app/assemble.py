@@ -42,14 +42,15 @@ def assemble(code):
         current_offset = starting_offset 
 
         #We are gonna do an hack to support labels, since I want line by line assembly and also support labels
-        #I'm gonna first assemble it all at once, and then assemble each line, catching any symbol exceptions for labels
-        #I'll then disassemble the original code at that point to get the the instruction that uses the label and add it
+        #And labels won't work if we assemble it line by line cuz labels will be on a different lien
+        #So, I'm gonna first assemble it all at once, and then assemble each line, catching any symbol exceptions for labels
+        #I'll then disassemble the originally assembled code code at that point to get the the instruction that uses the label and add it
 
         current_keystone = keystone_instances[current_settings['ARCH']][current_settings['MODE']][current_settings['ENDIAN']]
         current_capstone = capstone_instances[current_settings['ARCH']][current_settings['MODE']][current_settings['ENDIAN']]
         current_capstone.detail = True
 
-        init_assembled_code = current_keystone.asm(code['code'],current_offset)[0] 
+        original_assembled_code = current_keystone.asm(code['code'],current_offset)[0] 
 
         code_to_assemble_by_line = code['code'].strip().split("\n")
 
@@ -61,7 +62,7 @@ def assemble(code):
                 if machine_line is None:
                     machine_line = []
             except keystone.KsError as e:#The line probably uses a label
-                current_assembled_code = bytes(init_assembled_code[current_offset-starting_offset:]) #Bytes cuz capstone only accepts bytestrings
+                current_assembled_code = bytes(original_assembled_code[current_offset-starting_offset:]) #Bytes cuz capstone only accepts bytestrings
                 machine_line = list(next(current_capstone.disasm(current_assembled_code, current_offset)).bytes) #next() cuz capstone returns a generator object
 
             current_offset += len(machine_line) #The offset increases by length of assembled code 
