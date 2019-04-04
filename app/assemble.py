@@ -38,7 +38,10 @@ def assemble(code):
     try:
         current_settings = session['settings']
         
-        starting_offset = int(current_settings['OFFSET'])
+        try:
+            starting_offset = int(current_settings['OFFSET'], 16)
+        except:
+            starting_offset = int(current_settings['OFFSET'])
         current_offset = starting_offset 
 
         #We are gonna do an hack to support labels, since I want line by line assembly and also support labels

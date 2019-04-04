@@ -29,12 +29,16 @@ def disassemble(code):
     current_settings = session['settings']
 
     current_capstone = capstone_instances[current_settings['ARCH']][current_settings['MODE']][current_settings['ENDIAN']]
+    try:
+        current_offset = int(current_settings['OFFSET'], 16)
+    except:
+        current_offset = int(current_settings['OFFSET'])
 
     code_to_disassemble = bytes([X for Y in code['code'] for X in Y]) #Flatten the list
 
     output_instructions = ""
 
-    for instr in current_capstone.disasm(code_to_disassemble, int(current_settings['OFFSET'])):
+    for instr in current_capstone.disasm(code_to_disassemble, current_offset):
         output_instructions += "{} {}\n".format(instr.mnemonic, instr.op_str)
 
     ninja_socketio.emit('disassembled', output_instructions)

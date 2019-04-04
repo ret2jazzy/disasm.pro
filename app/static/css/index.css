@@ -91,14 +91,12 @@ textarea {
 }
 .simple-style-inputs {
     padding : 0;
-    box-shadow : -3px 4px 7px green,0px -4px 6px green;
 }
 
 .circle {
     width: 7vw;
     height: 100px;
     border-radius: 50%;
-    box-shadow : -3px 4px 7px #beffbe,0px -4px 6px #beffbe;
 }
 
 
