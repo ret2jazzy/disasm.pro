@@ -4,15 +4,16 @@
 	<title>Assembly Ninja</title>
 	<link rel="stylesheet" href="static/css/libs/w3.css">
 	<link rel="stylesheet" href="static/css/index.css">
+	<link rel="stylesheet" href="static/css/dark.css">
 
     <script src="static/js/libs/ace/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8" async defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
 </head>
 <body>
 	<div>
-		<div class="w3-container w3-serif w3-black">
-            <div class="w3-panel w3-container w3-row-padding w3-black">
-                <div class="w3-col" style="margin-right:10px;width: 15%">
+		<div class="w3-container w3-serif">
+            <div class="w3-panel w3-container w3-row-padding">
+                <div class="w3-col" style="margin-right:3%;width: 15%">
                     <select id="ARCH" class="simple-style-inputs w3-select">
                         <option value="ARCH_X86">Arch: x86</option>
                         <option value="ARCH_ARM">Arch: ARM</option>
@@ -22,18 +23,18 @@
                         <option value="ARCH_SPARC">Arch: Sparc</option>
                     </select>
                 </div>
-                <div class="w3-col" style="margin-right:10px;width: 15%">
+                <div class="w3-col" style="margin-right:3%;width: 15%">
                     <select id="MODE" class="simple-style-inputs w3-select">
                     </select>
                 </div>
-                <div class="w3-col" style="margin-right:10px;width: 15%">
+                <div class="w3-col" style="margin-right:3%;width: 15%">
                     <select id="ENDIAN" class="simple-style-inputs w3-select">
                     </select>
                 </div>
-                <div class="w3-col" style="margin-right:10px;width: 20%">
+                <div class="w3-col" style="margin-right:3%;width: 15%">
                     Offset: <input id="OFFSET" value="0" style="width:70%" class="simple-style-inputs w3-select" />
                 </div>
-                <div class="w3-col" style="margin-right:10px;width: 15%">
+                <div class="w3-col" style="margin-right:3%;width: 15%">
                     <select id="VIEW" class="simple-style-inputs w3-select">
                         <option value="1">Prettified</option>
                         <option value="2">Raw String</option>
@@ -45,17 +46,10 @@
 
 		<div style="margin-top:20px">
 			<div class="w3-row-padding">
-                <div class="w3-col" style="width:46%">
+                <div class="w3-col" style="width:48%">
                     <div id="asm_editor" class="editor w3-card"></div>
                 </div>
-                <div class="w3-col w3-center" style="width:8%">
-                    <div class="cirlce-wrap" style="margin-top:35vh">
-                        <div class="circle">
-                            Arrow Here
-                        </div>
-                    </div>
-                </div>
-                <div class="w3-col" style="width:46%">
+                <div class="w3-col" style="width:48%">
                     <div id="machine_editor" class="editor w3-card"></div>
                 </div>
             </div>

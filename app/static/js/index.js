@@ -78,13 +78,16 @@ function init_settings(){
 
 
     asm_editor = ace.edit("asm_editor");// The editor where we write asm 
-    asm_editor.setTheme("ace/theme/dawn");
+    asm_editor.setTheme("ace/theme/twilight");
     asm_editor.session.setMode("ace/mode/assembly_x86");
+    asm_editor.setShowPrintMargin(false)
     asm_editor.session.setValue(global_settings.asm_code)
 
     machine_editor = ace.edit("machine_editor");// Where the disassebmled code is displayed
-    machine_editor.setTheme("ace/theme/dawn");
+    machine_editor.setTheme("ace/theme/twilight");
     machine_editor.session.setMode("ace/mode/text");
+    machine_editor.setShowPrintMargin(false)
+    machine_editor.renderer.setShowGutter(false);
     machine_editor.session.setValue(global_settings.machine_code)
     
     sync_settings_local()
