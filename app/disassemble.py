@@ -29,8 +29,8 @@ def disassemble(code):
     current_settings = session['settings']
 
     current_capstone = capstone_instances[current_settings['ARCH']][current_settings['MODE']][current_settings['ENDIAN']]
-    
-    code_to_disassemble = bytes([Y for Y in code['code'] for X in Y]) #Flatten the list
+
+    code_to_disassemble = bytes([X for Y in code['code'] for X in Y]) #Flatten the list
 
     output_instructions = ""
 

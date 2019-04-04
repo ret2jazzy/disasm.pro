@@ -1,5 +1,5 @@
 //There is some ambiguity in the js I wrote, assembled code and machine code are the same thing while disassembled code and asm code are the same thing. That'll help you understand the variable names if you want to...
-const settings_skeleton = {'ARCH' : '', 'MODE' : '', 'ENDIAN' : '', 'OFFSET' : '', 'VIEW' : ''}
+const settings_skeleton = {'ARCH' : '', 'MODE' : '', 'ENDIAN' : '', 'OFFSET' : ''}
 
 let global_settings = localStorage;
 //The assembled code bytes are the stored code from the last set_settings
@@ -47,12 +47,14 @@ document.body.onload = ()=> {
     asm_editor.session.on('change', function(delta) {
         global_settings.asm_code = asm_editor.getValue()
         if (mutex_lock) return; //A lock here is neede because setValue of ace editor fires onchange event
+        global_settings.last_focus = 0
         send_asm_update();
     });
 
     machine_editor.session.on('change', function(delta) {
         global_settings.machine_code = machine_editor.getValue()
         if (mutex_lock) return;
+        global_settings.last_focus = 1
         send_machine_update();
     });
 
@@ -61,7 +63,7 @@ document.body.onload = ()=> {
 function init_settings(){
 
     if(global_settings.ARCH === undefined){ //if only ARCH is null, aka new session, initialize everything
-        default_settings = {'ARCH' : 'ARCH_X86', 'MODE' : 'MODE_64', 'ENDIAN' : 'MODE_LITTLE_ENDIAN', 'OFFSET' : '0', 'VIEW' : '1'}
+        default_settings = {'ARCH' : 'ARCH_X86', 'MODE' : 'MODE_64', 'ENDIAN' : 'MODE_LITTLE_ENDIAN', 'OFFSET' : 0}
         //Set the value of settings being sent to server
         for(key in default_settings){
             global_settings[key] = default_settings[key]
@@ -70,6 +72,7 @@ function init_settings(){
         global_settings.asm_code = "mov rax, 0x0\n";
         global_settings.machine_code = "48 C7 C0 00 00 00 00\n"
         global_settings.machine_code_bytes = "[[0x48, 0xC7, 0xC0, 0x00, 0x00, 0x00, 0x00]]" 
+        global_settings.last_focus = 0 // 0 means on the asm editor and 1 means on the machine editor
 
     }
 
@@ -99,7 +102,9 @@ function update_settings_to_server(){
 
     socket.emit('update_settings', current_settings)
     //Only for when the assembler is available
-    send_asm_update()
+    if(global_settings.last_focus == 0)
+        send_asm_update()
+    else send_machine_update()
 }
 
 function clear_option_element(element){
@@ -108,7 +113,11 @@ function clear_option_element(element){
 }
 
 function offset_update(OFFSET){
-    global_settings['OFFSET'] = OFFSET;
+    try{
+    global_settings['OFFSET'] = parseInt(OFFSET, 16);
+    } catch (err){
+        global_settings['OFFSET'] = parseInt(OFFSET);
+    }
 }
 
 function endian_update(ENDIAN){
