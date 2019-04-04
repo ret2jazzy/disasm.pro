@@ -42,7 +42,7 @@ function parse_prettified(code){
         if(code_line_p1.length&1 != 0)throw "Invalid hex"
         //convert to int array from hex
         let parsed_hex = []
-        for(let i = 0; i < code_line.length; i+=2){
+        for(let i = 0; i < code_line_p1.length; i+=2){
            parsed_hex.push(parseInt(code_line_p1.substr(i, i+2), 16))
         }
         machine_parsed.push(parsed_hex);
