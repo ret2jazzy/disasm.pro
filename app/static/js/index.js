@@ -1,4 +1,4 @@
-
+//There is some ambiguity in the js I wrote, assembled code and machine code are the same thing while disassembled code and asm code are the same thing. That'll help you understand the variable names if you want to...
 const settings_skeleton = {'ARCH' : '', 'MODE' : '', 'ENDIAN' : '', 'OFFSET' : '', 'VIEW' : ''}
 
 let global_settings = localStorage;
@@ -12,6 +12,8 @@ document.body.onload = ()=> {
     socket = io.connect('http://' + document.domain + ':' + location.port); // SocketIO's socket
 
     socket.on('assembled', update_assembled_code)
+
+    socket.on('disassembled', update_disassembled_code)
 
     init_settings()
 
@@ -44,16 +46,14 @@ document.body.onload = ()=> {
 
     asm_editor.session.on('change', function(delta) {
         global_settings.asm_code = asm_editor.getValue()
-
         if (mutex_lock) return; //A lock here is neede because setValue of ace editor fires onchange event
-
         send_asm_update();
     });
 
     machine_editor.session.on('change', function(delta) {
         global_settings.machine_code = machine_editor.getValue()
-
         if (mutex_lock) return;
+        send_machine_update();
     });
 
 }

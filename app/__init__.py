@@ -14,3 +14,4 @@ ninja_socketio = SocketIO(asm_ninja, manage_session=False) #The socketIO app
 from . import index, assemble, disassemble, settings
 #Init the keystones
 assemble.init_keystone()
+disassemble.init_capstone()
