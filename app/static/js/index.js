@@ -82,12 +82,15 @@ function init_settings(){
     asm_editor.session.setMode("ace/mode/assembly_x86");
     asm_editor.setShowPrintMargin(false)
     asm_editor.session.setValue(global_settings.asm_code)
+    asm_editor.setFontSize("16px")
+    asm_editor.setOptions({fontFamily: 'Helvetica'})
 
     machine_editor = ace.edit("machine_editor");// Where the disassebmled code is displayed
     machine_editor.setTheme("ace/theme/twilight");
     machine_editor.session.setMode("ace/mode/text");
     machine_editor.setShowPrintMargin(false)
     machine_editor.renderer.setShowGutter(false);
+    machine_editor.setFontSize("16px")
     machine_editor.session.setValue(global_settings.machine_code)
     
     sync_settings_local()
