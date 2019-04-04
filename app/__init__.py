@@ -9,7 +9,7 @@ asm_ninja.config['SECRET_KEY'] = 'topsecrethacker'
 asm_ninja.config['SESSION_TYPE'] = 'filesystem'
 
 Session(asm_ninja)
-ninja_socketio = SocketIO(asm_ninja, manage_session=False) #The socketIO app
+ninja_socketio = SocketIO(asm_ninja) #The socketIO app
 
 from . import index, assemble, disassemble, settings
 #Init the keystones

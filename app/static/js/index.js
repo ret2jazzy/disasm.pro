@@ -63,7 +63,7 @@ document.body.onload = ()=> {
 function init_settings(){
 
     if(global_settings.ARCH === undefined){ //if only ARCH is null, aka new session, initialize everything
-        default_settings = {'ARCH' : 'ARCH_X86', 'MODE' : 'MODE_64', 'ENDIAN' : 'MODE_LITTLE_ENDIAN', 'OFFSET' : '0x0'}
+        default_settings = {'ARCH' : 'ARCH_X86', 'MODE' : 'MODE_64', 'ENDIAN' : 'MODE_LITTLE_ENDIAN', 'OFFSET' : '0x0', 'VIEW': '1'}
         //Set the value of settings being sent to server
         for(key in default_settings){
             global_settings[key] = default_settings[key]

@@ -1,4 +1,5 @@
 from flask import session
+from flask_socketio import emit
 from . import ninja_socketio
 from .constants import keystone_modes
 from .disassemble import capstone_instances
@@ -71,6 +72,6 @@ def assemble(code):
             current_offset += len(machine_line) #The offset increases by length of assembled code 
             assembled_code.append(machine_line)
 
-        ninja_socketio.emit('assembled', assembled_code)
-    except:
+        emit('assembled', assembled_code)
+    except Exception as e:
         return

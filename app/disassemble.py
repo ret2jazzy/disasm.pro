@@ -2,6 +2,7 @@ from . import ninja_socketio
 from flask import session
 from .constants import capstone_modes
 from capstone import *
+from flask_socketio import emit
 
 capstone_instances = {}
 
@@ -41,7 +42,7 @@ def disassemble(code):
     for instr in current_capstone.disasm(code_to_disassemble, current_offset):
         output_instructions += "{} {}\n".format(instr.mnemonic, instr.op_str)
 
-    ninja_socketio.emit('disassembled', output_instructions)
+    emit('disassembled', output_instructions)
 
 
 
