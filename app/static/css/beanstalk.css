@@ -31,7 +31,10 @@
     overflow: hidden;
     border: 1px solid #eee;
     transition: box-shadow 200ms, border-color 150ms;
-    background: white;
+    /* background: white; */
+    background-color: #171616;
+    color: white;
+    text-shadow: 2px 3px 4px #1b7579;
 }
 
 .edd-head,

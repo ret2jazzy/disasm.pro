@@ -15,7 +15,7 @@
 	<div>
 		<div class="w3-container w3-serif">
             <div class="w3-panel w3-container w3-row-padding">
-                <div class="w3-col" style="margin-right:3%;width: 15%">
+                <div class="w3-col container-select-box">
                     <select id="ARCH" class="simple-style-inputs w3-select">
                         <option value="ARCH_X86">Arch: x86</option>
                         <option value="ARCH_ARM">Arch: ARM</option>
@@ -25,18 +25,21 @@
                         <option value="ARCH_SPARC">Arch: Sparc</option>
                     </select>
                 </div>
-                <div class="w3-col" style="margin-right:3%;width: 15%">
+                <div class="w3-col container-select-box">
                     <select id="MODE" class="simple-style-inputs w3-select">
                     </select>
                 </div>
-                <div class="w3-col" style="margin-right:3%;width: 15%">
+                <div class="w3-col container-select-box">
                     <select id="ENDIAN" class="simple-style-inputs w3-select">
                     </select>
                 </div>
-                <div class="w3-col" style="margin-right:3%;width: 15%">
-                    Offset: <input id="OFFSET" value="0" style="width:70%" class="simple-style-inputs w3-select" />
+                <div class="w3-col container-select-box">
+                    <div style="width:220px;height:50px">
+                        <span style="color:white;font-size: 17px;font-family: 'Open Sans', arial, helvetica, sans-serif;text-shadow: 1px 1px 1px #1b7579;">Offset: </span>
+                        <input id="OFFSET" value="0" style="width:70%;height: 90%;" class="edd-head simple-style-inputs w3-select" />
+                    </div>
                 </div>
-                <div class="w3-col" style="margin-right:3%;width: 15%">
+                <div class="w3-col container-select-box">
                     <select id="VIEW" class="simple-style-inputs w3-select">
                         <option value="1">Prettified</option>
                         <option value="2">Raw String</option>

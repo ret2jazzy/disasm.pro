@@ -91,6 +91,12 @@ textarea {
 }
 .simple-style-inputs {
     padding : 0;
+    border-radius: 3%;
+}
+
+.container-select-box{
+    margin-right:5%;
+    width: 15%;
 }
 
 
