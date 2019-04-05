@@ -83,7 +83,7 @@ function init_settings(){
     asm_editor.setShowPrintMargin(false)
     asm_editor.session.setValue(global_settings.asm_code)
     asm_editor.setFontSize("16px")
-    asm_editor.setOptions({fontFamily: 'Helvetica'})
+    asm_editor.setOptions({fontFamily: '"Courier New", Courier, monospace'})
 
     machine_editor = ace.edit("machine_editor");// Where the disassebmled code is displayed
     machine_editor.setTheme("ace/theme/twilight");
