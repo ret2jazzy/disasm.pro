@@ -8,7 +8,6 @@ let socket, asm_editor, machine_editor;
 let mutex_lock = false;
     
 document.body.onload = ()=> {
-
     socket = io.connect('http://' + document.domain + ':' + location.port); // SocketIO's socket
 
     socket.on('assembled', update_assembled_code)
@@ -57,7 +56,7 @@ document.body.onload = ()=> {
         global_settings.last_focus = 1
         send_machine_update();
     });
-
+    easydropdown.all()
 }
 
 function init_settings(){
