@@ -43,7 +43,7 @@ function parse_prettified(code){
         //convert to int array from hex
         let parsed_hex = []
         for(let i = 0; i < code_line_p1.length; i+=2){
-           parsed_hex.push(parseInt(code_line_p1.substr(i, i+2), 16))
+           parsed_hex.push(parseInt(code_line_p1.substr(i, 2), 16))
         }
         machine_parsed.push(parsed_hex);
     })

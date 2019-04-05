@@ -35,7 +35,6 @@ def disassemble(code):
     except:
         current_offset = int(current_settings['OFFSET'])
 
-    print("Disassembling", code['code'])
     code_to_disassemble = bytes([X for Y in code['code'] for X in Y]) #Flatten the list
 
     output_instructions = ""
