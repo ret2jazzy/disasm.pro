@@ -56,7 +56,10 @@ document.body.onload = ()=> {
         global_settings.last_focus = 1
         send_machine_update();
     });
-    easydropdown.all()
+
+    easydropdown.all(    {behavior: {
+        liveUpdates: true
+    } })
 }
 
 function init_settings(){
@@ -122,15 +125,24 @@ function offset_update(OFFSET){
 }
 
 function endian_update(ENDIAN){
+    if(ENDIAN == ""){ //F bug in the easydropdown library which launches two event handlers
+        document.getElementById('ENDIAN').value = global_settings['ENDIAN'];
+        return
+    }
     global_settings['ENDIAN'] = ENDIAN;
 }
 
 function mode_update(MODE){
+    if(MODE == ""){ //F bug in the easydropdown library which launches two event handlers
+        document.getElementById('MODE').value = global_settings['MODE'];
+        return
+    }
+
     global_settings['MODE'] = MODE;
 
-    current_mode = keystone_modes[global_settings['ARCH']]['MODES'][MODE]
+    let current_mode = keystone_modes[global_settings['ARCH']]['MODES'][MODE]
 
-    current_mode_endians = Object.keys(current_mode['ENDIAN'])
+    let current_mode_endians = Object.keys(current_mode['ENDIAN'])
 
     clear_option_element('ENDIAN');
 
@@ -155,14 +167,16 @@ function arch_update(ARCH){
     current_arch = keystone_modes[ARCH]
 
     current_arch_modes = Object.keys(current_arch['MODES'])
+    
+    let current_mode_elem = document.getElementById('MODE')
 
-    clear_option_element('MODE')
+    clear_option_element('MODE');
 
     current_arch_modes.forEach(function(mode){
         let opt = document.createElement("option");
         opt.text = current_arch['MODES'][mode].DESCRIPTION
         opt.value = mode
-        document.getElementById('MODE').add(opt);
+        current_mode_elem.add(opt);
     })
 
     if (!current_arch_modes.includes(global_settings['MODE']))

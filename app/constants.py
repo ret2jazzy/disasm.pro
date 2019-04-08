@@ -52,39 +52,39 @@ keystone_modes = {
                 }
             },
 
-        'ARCH_MIPS': {
-            'VAL' : KS_ARCH_MIPS,
-            'MODES' : {
-                'MODE_MIPS32' : {
-                    'VAL' : KS_MODE_MIPS32,
-                    'DESCRIPTION' : '32 Bit',
-                    'ENDIAN' : {
-                        'MODE_LITTLE_ENDIAN': {
-                            'VAL': KS_MODE_LITTLE_ENDIAN,
-                            'DESCRIPTION' : 'Little Endian'
-                            },
-                        'MODE_BIG_ENDIAN' : {
-                            'VAL': KS_MODE_BIG_ENDIAN,
-                            'DESCRIPTION' : 'Big Endian'
-                            }
-                        }
-                    },
-                'MODE_MIPS64' : {
-                    'VAL' : KS_MODE_MIPS64,
-                    'DESCRIPTION' : '64 Bit',
-                    'ENDIAN' : {
-                        'MODE_LITTLE_ENDIAN': {
-                            'VAL': KS_MODE_LITTLE_ENDIAN,
-                            'DESCRIPTION' : 'Little Endian'
-                            },
-                        'MODE_BIG_ENDIAN' : {
-                            'VAL': KS_MODE_BIG_ENDIAN,
-                            'DESCRIPTION' : 'Big Endian'
-                            }
-                        }
-                    }
-                }
-            },
+#         'ARCH_MIPS': {
+            # 'VAL' : KS_ARCH_MIPS,
+            # 'MODES' : {
+                # 'MODE_MIPS32' : {
+                    # 'VAL' : KS_MODE_MIPS32,
+                    # 'DESCRIPTION' : '32 Bit',
+                    # 'ENDIAN' : {
+                        # 'MODE_LITTLE_ENDIAN': {
+                            # 'VAL': KS_MODE_LITTLE_ENDIAN,
+                            # 'DESCRIPTION' : 'Little Endian'
+                            # },
+                        # 'MODE_BIG_ENDIAN' : {
+                            # 'VAL': KS_MODE_BIG_ENDIAN,
+                            # 'DESCRIPTION' : 'Big Endian'
+                            # }
+                        # }
+                    # },
+                # 'MODE_MIPS64' : {
+                    # 'VAL' : KS_MODE_MIPS64,
+                    # 'DESCRIPTION' : '64 Bit',
+                    # 'ENDIAN' : {
+                        # 'MODE_LITTLE_ENDIAN': {
+                            # 'VAL': KS_MODE_LITTLE_ENDIAN,
+                            # 'DESCRIPTION' : 'Little Endian'
+                            # },
+                        # 'MODE_BIG_ENDIAN' : {
+                            # 'VAL': KS_MODE_BIG_ENDIAN,
+                            # 'DESCRIPTION' : 'Big Endian'
+                            # }
+                        # }
+                    # }
+                # }
+            # },
 
         'ARCH_SPARC' : {
                 'VAL' : KS_ARCH_SPARC,
@@ -224,39 +224,39 @@ capstone_modes = {
                 }
             },
 
-        'ARCH_MIPS': {
-            'VAL' : CS_ARCH_MIPS,
-            'MODES' : {
-                'MODE_MIPS32' : {
-                    'VAL' : CS_MODE_MIPS32,
-                    'DESCRIPTION' : '32 Bit',
-                    'ENDIAN' : {
-                        'MODE_LITTLE_ENDIAN': {
-                            'VAL': CS_MODE_LITTLE_ENDIAN,
-                            'DESCRIPTION' : 'Little Endian'
-                            },
-                        'MODE_BIG_ENDIAN' : {
-                            'VAL': CS_MODE_BIG_ENDIAN,
-                            'DESCRIPTION' : 'Big Endian'
-                            }
-                        }
-                    },
-                'MODE_MIPS64' : {
-                    'VAL' : CS_MODE_MIPS64,
-                    'DESCRIPTION' : '64 Bit',
-                    'ENDIAN' : {
-                        'MODE_LITTLE_ENDIAN': {
-                            'VAL': CS_MODE_LITTLE_ENDIAN,
-                            'DESCRIPTION' : 'Little Endian'
-                            },
-                        'MODE_BIG_ENDIAN' : {
-                            'VAL': CS_MODE_BIG_ENDIAN,
-                            'DESCRIPTION' : 'Big Endian'
-                            }
-                        }
-                    }
-                }
-            },
+#         'ARCH_MIPS': {
+            # 'VAL' : CS_ARCH_MIPS,
+            # 'MODES' : {
+                # 'MODE_MIPS32' : {
+                    # 'VAL' : CS_MODE_MIPS32,
+                    # 'DESCRIPTION' : '32 Bit',
+                    # 'ENDIAN' : {
+                        # 'MODE_LITTLE_ENDIAN': {
+                            # 'VAL': CS_MODE_LITTLE_ENDIAN,
+                            # 'DESCRIPTION' : 'Little Endian'
+                            # },
+                        # 'MODE_BIG_ENDIAN' : {
+                            # 'VAL': CS_MODE_BIG_ENDIAN,
+                            # 'DESCRIPTION' : 'Big Endian'
+                            # }
+                        # }
+                    # },
+                # 'MODE_MIPS64' : {
+                    # 'VAL' : CS_MODE_MIPS64,
+                    # 'DESCRIPTION' : '64 Bit',
+                    # 'ENDIAN' : {
+                        # 'MODE_LITTLE_ENDIAN': {
+                            # 'VAL': CS_MODE_LITTLE_ENDIAN,
+                            # 'DESCRIPTION' : 'Little Endian'
+                            # },
+                        # 'MODE_BIG_ENDIAN' : {
+                            # 'VAL': CS_MODE_BIG_ENDIAN,
+                            # 'DESCRIPTION' : 'Big Endian'
+                            # }
+                        # }
+                    # }
+                # }
+            # },
 
         'ARCH_SPARC' : {
                 'VAL' : CS_ARCH_SPARC,
