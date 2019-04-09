@@ -21,7 +21,6 @@
                         <option value="ARCH_ARM">Arch: ARM</option>
                         <option value="ARCH_ARM64">Arch: ARM64</option>
                         <option value="ARCH_PPC">Arch: PowerPC</option>
-                        <option value="ARCH_SPARC">Arch: Sparc</option>
                     </select>
                 </div>
                 <div class="w3-col container-select-box">
@@ -34,8 +33,8 @@
                 </div>
                 <div class="w3-col container-select-box">
                     <div style="width:220px;height:50px">
-                        <label for="OFFSET" style="color:white;font-size: 17px;font-family: 'Open Sans', arial, helvetica, sans-serif;text-shadow: 1px 1px 1px #1b7579;padding-right:3%">Offset: </label>
-                        <input id="OFFSET" value="0" style="width:70%;height: 90%;box-sizing: border-box;padding-right:10px;" class="edd-head simple-style-inputs w3-select" />
+                        <label for="OFFSET" style="color:white;font-size: 17px;font-family: 'Open Sans', arial, helvetica, sans-serif;text-shadow: 1px 1px 1px #1b7579;padding-right:3%">Base: </label>
+                        <input id="OFFSET" value="0x0" style="width:70%;height: 90%;box-sizing: border-box;padding-right:10px;" class="edd-head simple-style-inputs w3-select" />
                     </div>
                 </div>
                 <div class="w3-col container-select-box">
@@ -58,8 +57,8 @@
             </div>
 
             <div class="flexcontainer" style="">
-                <div id="error-box" class="w3-code errorbox">
- haxx
+                <div id="msg-box" class="w3-code errorbox">
+                    Initializing...
                 </div>
             </div>
 

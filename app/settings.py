@@ -13,13 +13,12 @@ from flask_socketio import emit
 def update(options):
     try:
         session['settings'] = copy.copy(options)
-
     except:
         return False
 
-# @ninja_socketio.on('get_settings')
-# def get_settings():
-    # if 'settings' not in session:
-        # session['settings'] = {'ARCH' : 'ARCH_X86', 'MODE' : 'MODE_64', 'ENDIAN' : 'MODE_LITTLE_ENDIAN', 'OFFSET' : '0', 'VIEW' : '1'}
+def get_settings():
+    if 'settings' not in session:
+        emit('get_settings')
+        raise Exception("No settings initialized")
+    return session['settings']
 
-#     emit('set_settings', session['settings'])

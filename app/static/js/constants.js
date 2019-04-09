@@ -113,25 +113,25 @@ keystone_modes = {
         //}
     /*},*/
 
-    'ARCH_SPARC' : {
-        'VAL' : KS_ARCH_SPARC,
-        'MODES' : {
-            'MODE_SPARC32' : {
-                'VAL' : KS_MODE_SPARC32,
-                'DESCRIPTION' : '32 Bit',
-                'ENDIAN' : {
-                    'MODE_LITTLE_ENDIAN': {
-                        'VAL': KS_MODE_LITTLE_ENDIAN,
-                        'DESCRIPTION' : 'Little Endian'
-                    },
-                    'MODE_BIG_ENDIAN' : {
-                        'VAL': KS_MODE_BIG_ENDIAN,
-                        'DESCRIPTION' : 'Big Endian'
-                    }
-                }
-            }
-        }
-    },
+/*    'ARCH_SPARC' : {*/
+        //'VAL' : KS_ARCH_SPARC,
+        //'MODES' : {
+            //'MODE_SPARC32' : {
+                //'VAL' : KS_MODE_SPARC32,
+                //'DESCRIPTION' : '32 Bit',
+                //'ENDIAN' : {
+                    //'MODE_LITTLE_ENDIAN': {
+                        //'VAL': KS_MODE_LITTLE_ENDIAN,
+                        //'DESCRIPTION' : 'Little Endian'
+                    //},
+                    //'MODE_BIG_ENDIAN' : {
+                        //'VAL': KS_MODE_BIG_ENDIAN,
+                        //'DESCRIPTION' : 'Big Endian'
+                    //}
+                //}
+            //}
+        //}
+    //},
 
     'ARCH_PPC' : {
         'VAL' : KS_ARCH_PPC,

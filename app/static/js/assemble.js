@@ -37,4 +37,6 @@ function update_assembled_code(code){
         update_assembled_prettified(code)
     else update_assembled_raw(code);
 
+    set_success_message("Code Assembled")
+
 }

@@ -1,6 +1,7 @@
 from flask import session
 from flask_socketio import emit
 from . import ninja_socketio
+from .settings import get_settings
 from .constants import keystone_modes
 from .disassemble import capstone_instances
 from keystone import *
@@ -37,7 +38,7 @@ Receive a JSON Object with data to assemble
 @ninja_socketio.on('assemble')
 def assemble(code):
     try:
-        current_settings = session['settings']
+        current_settings = get_settings()
         
         try:
             starting_offset = int(current_settings['OFFSET'], 16)
@@ -74,4 +75,6 @@ def assemble(code):
 
         emit('assembled', assembled_code)
     except Exception as e:
+        print(e)
+        emit('error', str(e).split("(")[0]) #Super hack to get the first part of a Keystone error message
         return

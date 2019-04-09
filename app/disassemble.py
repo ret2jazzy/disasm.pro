@@ -1,4 +1,5 @@
 from . import ninja_socketio
+from .settings import get_settings
 from flask import session
 from .constants import capstone_modes
 from capstone import *
@@ -27,22 +28,27 @@ def init_capstone():
 
 @ninja_socketio.on('disassemble')
 def disassemble(code):
-    current_settings = session['settings']
-
-    current_capstone = capstone_instances[current_settings['ARCH']][current_settings['MODE']][current_settings['ENDIAN']]
     try:
-        current_offset = int(current_settings['OFFSET'], 16)
-    except:
-        current_offset = int(current_settings['OFFSET'])
+        current_settings = get_settings() 
 
-    code_to_disassemble = bytes([X for Y in code['code'] for X in Y]) #Flatten the list
+        current_capstone = capstone_instances[current_settings['ARCH']][current_settings['MODE']][current_settings['ENDIAN']]
+        try:
+            current_offset = int(current_settings['OFFSET'], 16)
+        except:
+            current_offset = int(current_settings['OFFSET'])
 
-    output_instructions = ""
+        code_to_disassemble = bytes([X for Y in code['code'] for X in Y]) #Flatten the list
 
-    for instr in current_capstone.disasm(code_to_disassemble, current_offset):
-        output_instructions += "{} {}\n".format(instr.mnemonic, instr.op_str)
+        output_instructions = ""
 
-    emit('disassembled', output_instructions)
+        for instr in current_capstone.disasm(code_to_disassemble, current_offset):
+            output_instructions += "{} {}\n".format(instr.mnemonic, instr.op_str)
+
+        emit('disassembled', output_instructions)
+    except Exception as e:
+        print(e)
+        emit('error', str(e).split("(")[0]) #Super hack to get the first part of a Keystone error message
+        return
 
 
 

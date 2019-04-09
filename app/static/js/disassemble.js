@@ -20,6 +20,7 @@ function update_disassembled_code(code){
     mutex_lock = true;
     asm_editor.setValue(code,1);
     mutex_lock = false;
+    set_success_message("Code Disassembled")
 }
 
 function parse_raw(code){

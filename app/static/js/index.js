@@ -14,6 +14,10 @@ document.body.onload = ()=> {
 
     socket.on('disassembled', update_disassembled_code)
 
+    socket.on('get_settings', update_settings_to_server)
+
+    socket.on('error', set_error_message); 
+
     init_settings()
 
     //Handler for when we receive assembled code
@@ -57,9 +61,9 @@ document.body.onload = ()=> {
         send_machine_update();
     });
 
-    easydropdown.all(    {behavior: {
+    easydropdown.all({behavior: {
         liveUpdates: true
-    } })
+    }})
 }
 
 function init_settings(){
@@ -93,6 +97,7 @@ function init_settings(){
     machine_editor.setShowPrintMargin(false)
     machine_editor.renderer.setShowGutter(false);
     machine_editor.setFontSize("16px")
+    machine_editor.setOptions({fontFamily: '"Courier New", Courier, monospace'})
     machine_editor.session.setValue(global_settings.machine_code)
     
     sync_settings_local()
@@ -208,3 +213,15 @@ function sync_settings_local(){
     view_update(global_settings['VIEW']);
 }
 
+function set_success_message(msg){
+    set_message("Success", msg);
+}
+
+function set_error_message(msg){
+    set_message("Error", msg);
+}
+
+function set_message(idnt, val){
+    let message = idnt + ": " + val
+    document.getElementById('msg-box').innerText = message;    
+}
