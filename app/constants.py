@@ -258,25 +258,25 @@ capstone_modes = {
                 # }
             # },
 
-        'ARCH_SPARC' : {
-                'VAL' : CS_ARCH_SPARC,
-                'MODES' : {
-                    'MODE_SPARC32' : {
-                        'VAL' : CS_MODE_LITTLE_ENDIAN,
-                        'DESCRIPTION' : '32 Bit',
-                        'ENDIAN' : {
-                            'MODE_LITTLE_ENDIAN': {
-                                'VAL': CS_MODE_LITTLE_ENDIAN,
-                                'DESCRIPTION' : 'Little Endian'
-                                },
-                            'MODE_BIG_ENDIAN' : {
-                                'VAL': CS_MODE_BIG_ENDIAN,
-                                'DESCRIPTION' : 'Big Endian'
-                                }
-                            }
-                        }
-                    }
-                },
+#         'ARCH_SPARC' : {
+                # 'VAL' : CS_ARCH_SPARC,
+                # 'MODES' : {
+                    # 'MODE_SPARC32' : {
+                        # 'VAL' : CS_MODE_LITTLE_ENDIAN,
+                        # 'DESCRIPTION' : '32 Bit',
+                        # 'ENDIAN' : {
+                            # 'MODE_LITTLE_ENDIAN': {
+                                # 'VAL': CS_MODE_LITTLE_ENDIAN,
+                                # 'DESCRIPTION' : 'Little Endian'
+                                # },
+                            # 'MODE_BIG_ENDIAN' : {
+                                # 'VAL': CS_MODE_BIG_ENDIAN,
+                                # 'DESCRIPTION' : 'Big Endian'
+                                # }
+                            # }
+                        # }
+                    # }
+                # },
 
         'ARCH_PPC' : {
                 'VAL' : CS_ARCH_PPC,
