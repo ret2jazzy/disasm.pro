@@ -12,8 +12,12 @@ function update_assembled_prettified(code){
     })
 
     mutex_lock = true
-    machine_editor.setOption("wrap", false);
+    machine_editor.setOption("wrap", false); //Don't wrap
     machine_editor.setValue(output_code, 1);
+    //move cursor simultaneously
+    let cur_line = asm_editor.selection.getCursor().row;
+    machine_editor.selection.moveTo(cur_line, 0);
+
     mutex_lock = false;
 
 }
@@ -26,7 +30,7 @@ function update_assembled_raw(code){
         output_code += hexed_line_raw
     })
     mutex_lock = true
-    machine_editor.setOption("wrap", true);
+    machine_editor.setOption("wrap", true); //wrap lines for raw string
     machine_editor.setValue(output_code, 1);
     mutex_lock = false;
 

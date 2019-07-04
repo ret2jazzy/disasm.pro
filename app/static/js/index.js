@@ -64,6 +64,8 @@ document.body.onload = ()=> {
     easydropdown.all({behavior: {
         liveUpdates: true
     }})
+
+
 }
 
 function init_settings(){
@@ -106,6 +108,7 @@ function init_settings(){
 
     update_settings_to_server()
 
+    document.getElementById('msg-box').innerText = "Initialized"; //Initialization message    
 }
 
 function update_settings_to_server(){

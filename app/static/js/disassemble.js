@@ -19,6 +19,9 @@ function send_machine_update(){
 function update_disassembled_code(code){
     mutex_lock = true;
     asm_editor.setValue(code,1);
+    //Update simultaneously
+    let cur_line = machine_editor.selection.getCursor().row;
+    asm_editor.selection.moveTo(cur_line, 0);
     mutex_lock = false;
     set_success_message("Code Disassembled")
 }

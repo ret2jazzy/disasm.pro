@@ -298,3 +298,7 @@ abbr[title]:after {
         page-break-after: avoid;
     }
 }
+
+.custom-mode > .edd-root {
+    width: 230px;
+}
