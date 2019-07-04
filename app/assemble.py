@@ -56,7 +56,6 @@ def assemble(code):
         current_endian = current_mode['ENDIAN'][current_settings['ENDIAN']]
 
         current_keystone = Ks(current_arch['VAL'], current_mode['VAL']+current_endian['VAL'])
-
         assembled_code = current_keystone.asm_new(code['code'],current_offset)[0] 
 
         emit('assembled', assembled_code)

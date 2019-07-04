@@ -94,10 +94,12 @@ function init_settings(){
     machine_editor = ace.edit("machine_editor");// Where the disassebmled code is displayed
     machine_editor.setTheme("ace/theme/twilight");
     machine_editor.session.setMode("ace/mode/text");
+    machine_editor.autoIndent = false;
     machine_editor.setShowPrintMargin(false)
     machine_editor.renderer.setShowGutter(false);
     machine_editor.setFontSize("16px")
     machine_editor.setOptions({fontFamily: '"Courier New", Courier, monospace'})
+    machine_editor.setOption('indentedSoftWrap', false);
     machine_editor.session.setValue(global_settings.machine_code)
     
     sync_settings_local()

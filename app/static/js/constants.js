@@ -34,7 +34,7 @@ keystone_modes = {
         'MODES' : {
             'MODE_ARM' : {
                 'VAL' : KS_MODE_ARM,
-                'DESCRIPTION' : '32 Bit',
+                'DESCRIPTION' : 'Armv8 32 bit (Aarch32)',
                 'ENDIAN' : {
                     'MODE_LITTLE_ENDIAN': {
                         'VAL': KS_MODE_LITTLE_ENDIAN,
@@ -48,7 +48,7 @@ keystone_modes = {
             },
             'MODE_THUMB' : {
                 'VAL' : KS_MODE_THUMB,
-                'DESCRIPTION' : '32 Bit Thumb',
+                'DESCRIPTION' : 'Armv8 16 bit (Thumb)',
                 'ENDIAN' : {
                     'MODE_LITTLE_ENDIAN': {
                         'VAL': KS_MODE_LITTLE_ENDIAN,
@@ -68,7 +68,7 @@ keystone_modes = {
         'MODES' : {
             'MODE_ARM' : {
                 'VAL' : KS_MODE_LITTLE_ENDIAN,
-                'DESCRIPTION' : '64 Bit',
+                'DESCRIPTION' : 'Armv8 64 Bit (Aarch64)',
                 'ENDIAN' : {
                     'MODE_LITTLE_ENDIAN': {
                         'VAL': KS_MODE_LITTLE_ENDIAN,
