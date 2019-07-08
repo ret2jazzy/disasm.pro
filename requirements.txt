@@ -1,5 +1,6 @@
 capstone
-keystone-engine
+flask
 flask-socketio
 flask-session
-flask
+gevent
+gevent-websockets

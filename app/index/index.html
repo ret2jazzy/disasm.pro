@@ -13,7 +13,7 @@
 </head>
 <body>
 	<div>
-            <div class="" style="display: flex;justify-content: space-around; padding: 10px">
+            <div class="headercontainer">
                 <div class="">
                     <select id="ARCH">
                         <option value="ARCH_X86">Arch: x86</option>
@@ -35,7 +35,7 @@
                 <div class="">
                     <div style="width:220px;height:50px">
                         <label for="OFFSET" style="color:white;font-size: 17px;font-family: 'Open Sans', arial, helvetica, sans-serif;text-shadow: 1px 1px 1px #1b7579;padding-right:3%">Base: </label>
-                        <input id="OFFSET" value="0x0" style="width:70%;height: 90%;box-sizing: border-box;padding-right:10px;padding-left:10px" class="edd-head simple-style-inputs w3-select" />
+                        <input id="OFFSET" value="0x0" style="width:70%;height: 90%;box-sizing: border-box;padding-right:10px;padding-left:10px" class="edd-head edd-root simple-style-inputs w3-select" />
                     </div>
                 </div>
                 <div class="">
@@ -56,13 +56,23 @@
                 </div>
             </div>
 
-            <div class="flexcontainer" style="">
-                <div id="msg-box" class="w3-code errorbox">
-                    Initializing...
-                </div>
-            </div>
-
         </div>
+        <div class="bottomcontainer">
+            <div id="filler" style="min-width: 20%">
+            </div>
+            <div id="msg-box" class="w3-code errorbox">
+                Initializing...
+            </div>
+            <div id="contact" class="footerright">
+                <a href=https://twitter.com/ret2got>
+                    <img src="static/img/twitter.png" width="50" height="40">
+                </a>
+                <a href=https://github.com/ret2got/disasm.ninja>
+                    <img src="static/img/github.png" width="50" height="40">
+                </a>
+            </div>
+        </div>
+
 
         <!-- Footer -->
     </div>

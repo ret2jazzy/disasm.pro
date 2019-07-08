@@ -100,33 +100,39 @@ textarea {
 }
 
 
-.flexcontainer {
+.bottomcontainer {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    padding: 10px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.headercontainer {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
 }
 
 .errorbox {
     background-color: rgb(20,20,20); 
     color: rgb(218,218,218);
     box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 10px 0px;
-    width: 25%;
-    flex: 1;
     border-radius: 5px;
+    min-width: 25%;
+    max-width: 40%;
     text-align: center;
     border: 1px solid black;
 }
 
 
 
-
-
-
-
-
-
-
+.footerright {
+    font-size: 0.8em;
+    min-width: 20%;
+    text-align: right;
+}
 
 
 /* ==========================================================================
@@ -239,10 +245,6 @@ Helper classes
     text-shadow: none !important;
 }
 
-a,
-a:visited {
-    text-decoration: underline;
-}
 
 a[href]:after {
     content: " (" attr(href) ")";
