@@ -27,6 +27,7 @@ function update_disassembled_code(code){
 }
 
 function parse_raw(code){
+    //TODO fix this soon 
     let raw_parsed = JSON.parse('"' + code.replace(/\\x/g, "\\u00") + '"'); // A super shitty hack to parse raw strings
     let machine_parsed = []
     //conver to array of ints
