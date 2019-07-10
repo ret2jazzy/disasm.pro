@@ -1,3 +1,0 @@
-[submodule "keystone"]
-	path = keystone
-	url = git@github.com-ret2got:ret2got/keystone.git
