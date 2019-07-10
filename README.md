@@ -2,9 +2,9 @@
 A multi-architecture realtime assembler/disassembler with line-to-line correlation. A live version is currently up at https://disasm.ninja/
 
 # What and Why
-It is basically a nice frontend of my [keystone](https://github.com/ret2got/keystone) fork (for line-to-line assembling) and [capstone](https://github.com/aquynh/capstone). I'm don't normally do frontend development but I wanted something for quickly assembling/disassembling tiny snippets of code (mostly during CTFs), so I ended up writing this. 
+It is basically a nice frontend of my [keystone](https://github.com/ret2got/keystone) fork (for line-to-line assembling) and [capstone](https://github.com/aquynh/capstone). I don't normally do frontend development but I wanted something for quickly assembling/disassembling tiny snippets of code (mostly during CTFs), so I ended up writing this. 
 
-I know there are other online assemblers/disassemblers out there, but none of them had all the features I wanted. 
+I know there are other online assemblers/disassemblers out there, but none of them had all the features I required. 
 
 # Support
 It currently supports 5 architectures:
