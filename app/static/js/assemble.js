@@ -7,7 +7,7 @@ function update_assembled_prettified(code){
     output_code = "";
 
     code.forEach(function(code_line){
-        hexed_line = (new Uint8Array(code_line)).map(function(inp){return ("0"+inp.toString(16)).substr(-2).toUpperCase()}).join(' ')
+        hexed_line = Array.from(new Uint8Array(code_line)).map(function(inp){return ("0"+inp.toString(16)).substr(-2).toUpperCase()}).join(' ')
         output_code += hexed_line + "\n"
     })
 
@@ -26,7 +26,7 @@ function update_assembled_raw(code){
     let output_code = ""
 
     code.forEach(function(code_line){
-        hexed_line_raw = (new Uint8Array(code_line)).map(function(inp){return "\\x"+ ("0"+inp.toString(16)).substr(-2).toUpperCase()}).join('')
+        hexed_line_raw = Array.from(new Uint8Array(code_line)).map(function(inp){return "\\x"+ ("0"+inp.toString(16)).substr(-2).toUpperCase()}).join('')
         output_code += hexed_line_raw
     })
     mutex_lock = true
